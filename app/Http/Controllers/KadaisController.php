@@ -31,7 +31,12 @@ class KadaisController extends Controller
      */
     public function create()
     {
-        //
+        $kadai = new Kadai;
+
+        return view('kadais.create', [
+            'kadai' => $kadai,
+        ]);
+
     }
 
     /**
@@ -42,7 +47,12 @@ class KadaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $kadai = new Kadai;
+        $kadai->content = $request->content;
+        $kadai->save();
+
+        return redirect('/');
+
     }
 
     /**
@@ -69,7 +79,12 @@ class KadaisController extends Controller
      */
     public function edit($id)
     {
-        //
+         $kadai = Kadai::find($id);
+
+        return view('kadais.edit', [
+            'kadai' => $kadai,
+        ]);
+
     }
 
     /**
@@ -81,7 +96,12 @@ class KadaisController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kadai = Kadai::find($id);
+        $kadai->content = $request->content;
+        $kadai->save();
+
+        return redirect('/');
+
     }
 
     /**
@@ -92,6 +112,10 @@ class KadaisController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $kadai = Kadai::find($id);
+        $kadai->delete();
+
+        return redirect('/');
+
     }
 }
