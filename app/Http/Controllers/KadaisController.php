@@ -48,10 +48,12 @@ class KadaisController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'status' => 'required|max:10',   // 追加
             'content' => 'required|max:191',
 
         
         $kadai = new Kadai;
+        $kadai->status = $request->status;    // 追加
         $kadai->content = $request->content;
         $kadai->save();
 
@@ -101,11 +103,13 @@ class KadaisController extends Controller
     public function update(Request $request, $id)
     {
          $this->validate($request, [
+            'status' => 'required|max:10',   // 追加
             'content' => 'required|max:191',
         ]);
 
         
         $kadai = Kadai::find($id);
+        $kadai->status = $request->status;    // 追加
         $kadai->content = $request->content;
         $kadai->save();
 

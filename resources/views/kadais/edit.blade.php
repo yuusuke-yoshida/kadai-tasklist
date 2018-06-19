@@ -6,6 +6,10 @@
 
     {!! Form::model($kadai, ['route' => ['kadais.update', $kadai->id], 'method' => 'put']) !!}
 
+        {!! Form::label('status', 'ステータス:') !!}
+        {!! Form::text('status') !!}
+
+
         {!! Form::label('content', 'タスク:') !!}
         {!! Form::text('content') !!}
 
