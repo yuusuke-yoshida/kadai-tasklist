@@ -50,7 +50,7 @@ class KadaisController extends Controller
         $this->validate($request, [
             'status' => 'required|max:10',   // 追加
             'content' => 'required|max:191',
-
+        ]);
         
         $kadai = new Kadai;
         $kadai->status = $request->status;    // 追加
