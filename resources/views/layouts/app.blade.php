@@ -6,6 +6,8 @@
     </head>
 
     <body>
+        @include('commons.error_kadais')
+        
         @yield('content')
     </body>
 </html>
