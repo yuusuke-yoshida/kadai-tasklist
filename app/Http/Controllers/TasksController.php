@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use App\Task;    // 追加
 
 
-class TasksController extends Controller
-{
+class TasksController extends Controller {
+    
     /**
      * Display a listing of the resource.
      *
