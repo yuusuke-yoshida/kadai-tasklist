@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Kadai;    // 追加
+use App\Task;    // 追加
 
 
-class KadaisController extends Controller
+class TasksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +16,10 @@ class KadaisController extends Controller
      */
     public function index()
     {
-        $kadais = Kadai::all();
+        $tasks = Task::all();
 
-        return view('kadais.index', [
-            'kadais' => $kadais,
+        return view('tasks.index', [
+            'tasks' => $task,
         ]);
 
     }
@@ -31,10 +31,10 @@ class KadaisController extends Controller
      */
     public function create()
     {
-        $kadai = new Kadai;
+        $task = new Task;
 
-        return view('kadais.create', [
-            'kadai' => $kadai,
+        return view('tasks.create', [
+            'task' => $task,
         ]);
 
     }
@@ -52,10 +52,10 @@ class KadaisController extends Controller
             'content' => 'required|max:191',
         ]);
         
-        $kadai = new Kadai;
-        $kadai->status = $request->status;    // 追加
-        $kadai->content = $request->content;
-        $kadai->save();
+        $task = new Task;
+        $task->status = $request->status;    // 追加
+        $task->content = $request->content;
+        $task->save();
 
         return redirect('/');
 
@@ -69,10 +69,10 @@ class KadaisController extends Controller
      */
     public function show($id)
     {
-         $kadai = Kadai::find($id);
+         $task = task::find($id);
 
-        return view('kadais.show', [
-            'kadai' => $kadai,
+        return view('tasks.show', [
+            'task' => $task,
         ]);
 
     }
@@ -85,10 +85,10 @@ class KadaisController extends Controller
      */
     public function edit($id)
     {
-         $kadai = Kadai::find($id);
+         $task = Task::find($id);
 
-        return view('kadais.edit', [
-            'kadai' => $kadai,
+        return view('tasks.edit', [
+            'task' => $task,
         ]);
 
     }
@@ -108,10 +108,10 @@ class KadaisController extends Controller
         ]);
 
         
-        $kadai = Kadai::find($id);
-        $kadai->status = $request->status;    // 追加
-        $kadai->content = $request->content;
-        $kadai->save();
+        $task = Task::find($id);
+        $task->status = $request->status;    // 追加
+        $task->content = $request->content;
+        $task->save();
 
         return redirect('/');
 
@@ -125,8 +125,8 @@ class KadaisController extends Controller
      */
     public function destroy($id)
     {
-        $kadai = Kadai::find($id);
-        $kadai->delete();
+        $task = Task::find($id);
+        $task->delete();
 
         return redirect('/');
 

@@ -2,9 +2,9 @@
 
 @section('content')
 
-    <h1>id: {{ $kadai->id }} の編集ページ</h1>
+    <h1>新規作成ページ</h1>
 
-    {!! Form::model($kadai, ['route' => ['kadais.update', $kadai->id], 'method' => 'put']) !!}
+    {!! Form::model($task, ['route' => 'tasks.store']) !!}
 
         {!! Form::label('status', 'ステータス:') !!}
         {!! Form::text('status') !!}
@@ -13,9 +13,8 @@
         {!! Form::label('content', 'タスク:') !!}
         {!! Form::text('content') !!}
 
-        {!! Form::submit('更新') !!}
+        {!! Form::submit('投稿') !!}
 
     {!! Form::close() !!}
-
 
 @endsection

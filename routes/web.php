@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', 'KadaisController@index');
+Route::get('/', 'tasksController@index');
 
-Route::resource('kadais', 'KadaisController');
+Route::resource('tasks', 'tasksController');
