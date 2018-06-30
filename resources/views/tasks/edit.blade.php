@@ -2,7 +2,7 @@
 
 @section('content')
 
-     <h1>id: {{ $task->id }} のメッセージ編集ページ</h1>
+     <h1>id: {{ $task->id }} のタスク編集ページ</h1>
 
 
 
@@ -16,7 +16,7 @@
         </div>
     
         <div class="form-group">
-            {!! Form::label('content', 'タスクメッセージ:') !!}
+            {!! Form::label('content', 'メッセージ:') !!}
             {!! Form::text('content', null, ['class' => 'form-control']) !!}
         </div>
     

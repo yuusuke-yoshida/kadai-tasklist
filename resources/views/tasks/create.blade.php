@@ -15,7 +15,7 @@
             </div>
     
             <div class="form-group">
-                {!! Form::label('content', 'タスクメッセージ:') !!}
+                {!! Form::label('content', 'メッセージ:') !!}
                 {!! Form::text('content', null, ['class' => 'form-control']) !!}
             </div>
     

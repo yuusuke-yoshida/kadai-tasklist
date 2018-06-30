@@ -18,10 +18,15 @@
          @include('commons.navbar')
 
         <div class="container">
-
+            <div class="row">
+                <div class="col-xs-12"></div>
+                <div class="col-sm-offset-2 col-sm-8"></div>
+                <div class="col-md-offset-2 col-md-8"></div>
+                <div class="col-lg-offset-3 col-lg-6"></div>
             @include('commons.error_tasks')
         
             @yield('content')
+            </div>
         </div>
     </body>
 </html>
