@@ -18,6 +18,7 @@ class TasksController extends Controller {
     {
         $tasks = Task::all();
 
+        // view() は blade.phpの形式のファイルをHTMLに変換してresponseを返す
         return view('tasks.index', [
             'tasks' => $tasks,
         ]);
