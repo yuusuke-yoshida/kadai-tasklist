@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Task;    // 追加
 
+use App\Http\Controllers\Controller;
 
 class TasksController extends Controller {
     
@@ -16,22 +17,41 @@ class TasksController extends Controller {
      */
     public function index()
     {
-        $tasks = Task::all();
+        
+         $data = [];
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $microposts = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+
+            $data = [
+                'user' => $user,
+                'tasks' => $tasks,
+            ];
+            $data += $this->counts($user);
+            return view('users.show', $data);
+        }else {
+            return view('welcome');
+        }
+    }
+}
+
+        //$tasks = Task::all();
 
         // view() は blade.phpの形式のファイルをHTMLに変換してresponseを返す
-        return view('tasks.index', [
-            'tasks' => $tasks,
-        ]);
+        //return view('tasks.index', [
+          //  'tasks' => $tasks,
+        //]);
 
-    }
-
+    
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+     
     public function create()
     {
+        
         $task = new Task;
 
         return view('tasks.create', [
@@ -57,7 +77,12 @@ class TasksController extends Controller {
         $task->status = $request->status;    // 追加
         $task->content = $request->content;
         $task->save();
+        
+         $request->user()->tasks()->create([
+            'content' => $request->content,
+        ]);
 
+        return redirect()->back();
         return redirect('/');
 
     }
@@ -126,9 +151,19 @@ class TasksController extends Controller {
      */
     public function destroy($id)
     {
-        $task = Task::find($id);
-        $task->delete();
+        
+         $task = \App\Task::find($id);
 
+        if (\Auth::id() === $task->user_id) {
+            $task->delete();
+        }
+
+
+        //$task = Task::find($id);
+       // $task->delete();
+        
+        
+        return redirect()->back();
         return redirect('/');
 
     }
