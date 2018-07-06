@@ -89,6 +89,18 @@
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
+                
+                @extends('layouts.app')
+
+                @section('content')
+                    <div class="center jumbotron">
+                        <div class="text-center">
+                            <h1>Welcome to the Tasklists</h1>
+                        </div>
+                    </div>
+                @endsection
+
+                
             </div>
         </div>
     </body>
