@@ -15,13 +15,13 @@ class TasksController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+     
+     public function index()
     {
-        
-         $data = [];
+        $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $microposts = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
                 'user' => $user,
@@ -31,7 +31,7 @@ class TasksController extends Controller {
             return view('users.show', $data);
         }else {
             return view('welcome');
-        }
+
     }
 }
 
@@ -57,7 +57,6 @@ class TasksController extends Controller {
         return view('tasks.create', [
             'task' => $task,
         ]);
-
     }
 
     /**
