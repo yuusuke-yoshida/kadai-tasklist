@@ -16,7 +16,7 @@ class TasksController extends Controller {
      * @return \Illuminate\Http\Response
      */
      
-     public function index()
+    public function index()
     {
         $data = [];
         if (\Auth::check()) {
@@ -32,10 +32,10 @@ class TasksController extends Controller {
         }else {
             return view('welcome');
 
+        }
     }
-}
 
-        //$tasks = Task::all();
+            //$tasks = Task::all();
 
         // view() は blade.phpの形式のファイルをHTMLに変換してresponseを返す
         //return view('tasks.index', [

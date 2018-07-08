@@ -29,9 +29,9 @@ class User extends Authenticatable
     
      public function tasks()
     {
-        return $this->belongsToMany('Task' , 'task_user');
-        // return $this->hasMany(Task::class);
-        //belongsToMany
+        return $this->hasMany('App\Task' , 'task_user');
+       
     }
 
 }
+//return $this->hasMany('Task' , 'task_user'); => 
