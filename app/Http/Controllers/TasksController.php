@@ -158,8 +158,8 @@ class TasksController extends Controller {
         }
 
 
-        //$task = Task::find($id);
-       // $task->delete();
+        $task = Task::find($id);
+        $task->delete();
         
         
         return redirect()->back();

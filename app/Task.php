@@ -8,9 +8,10 @@ class Task extends Model
 {
     protected $fillable = ['content', 'user_id'];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsToMany('User' , 'task_user');
+        //return $this->belongsToMany(User::class);
     }
 
 }
