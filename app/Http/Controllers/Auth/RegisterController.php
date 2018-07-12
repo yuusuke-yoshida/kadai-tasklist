@@ -33,7 +33,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
      
     public function __construct()

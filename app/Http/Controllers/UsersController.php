@@ -14,7 +14,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::paginate(10);
-
+        
         return view('users.index', [
             'users' => $users,
         ]);
@@ -22,6 +22,8 @@ class UsersController extends Controller
     
     public function show($id)
     {
+         //dump('ここに本当にきてる？');
+         //exit();
         $user = User::find($id);
          $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
 
@@ -32,7 +34,14 @@ class UsersController extends Controller
 
         $data += $this->counts($user);
 
-        return view('users.show', $date);
+        // 'users.show' はルート名ではない!
+        // 'users.show' はViewの場所
+        // resoucesの下にview関連のファイルが存在する
+        // Viewファイルは resources/views の下にある前提！
+        // . は何？ 
+        // ディレクトリ = フォルダ
+        // usersディレクトリの下にあるshow.blade.phpファイル
+        return view('users.show', $data);
             
     }
 

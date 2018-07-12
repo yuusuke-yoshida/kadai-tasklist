@@ -12,8 +12,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     
     public function counts($user) {
-        $count_tasks = $user->tasks()->count();
-
+        $count_tasks = $user->tasks()->count(); 
+//
         return [
             'count_tasks' => $count_tasks,
         ];

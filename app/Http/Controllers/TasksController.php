@@ -8,7 +8,8 @@ use App\Task;    // 追加
 
 use App\Http\Controllers\Controller;
 
-class TasksController extends Controller {
+class TasksController extends Controller 
+{
     
     /**
      * Display a listing of the resource.
@@ -16,24 +17,28 @@ class TasksController extends Controller {
      * @return \Illuminate\Http\Response
      */
      
-    public function index()
+    public function index() 
     {
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
             $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
-
+            $tasks = Task::all();
+            
             $data = [
                 'user' => $user,
                 'tasks' => $tasks,
             ];
             $data += $this->counts($user);
-            return view('users.show', $data);
+            return view('tasks.index', $data);
         }else {
             return view('welcome');
+            
+            
+        }    
+    }  
 
-        }
-    }
+    
 
             //$tasks = Task::all();
 
@@ -51,13 +56,26 @@ class TasksController extends Controller {
      
     public function create()
     {
-        
         $task = new Task;
+        $user = \Auth::user();
+        $data = [
+            'user' => $user,
+           
+        ];
 
         return view('tasks.create', [
             'task' => $task,
         ]);
+            
     }
+    
+     //public function create()
+    //{
+       // $message = new Message;
+
+        //return view('messages.create', [
+           // 'message' => $message,
+       // ]);
 
     /**
      * Store a newly created resource in storage.
@@ -68,20 +86,22 @@ class TasksController extends Controller {
     public function store(Request $request)
     {
         $this->validate($request, [
-            'status' => 'required|max:10',   // 追加
+            'status' => 'required|max:10',   //追加
             'content' => 'required|max:191',
         ]);
         
-        $task = new Task;
-        $task->status = $request->status;    // 追加
+    /**    
+        $task = new Task;                
+        $task->status = $request->status;   
         $task->content = $request->content;
         $task->save();
-        
-         $request->user()->tasks()->create([
-            'content' => $request->content,
+     */
+       
+         $request->user()->tasks()->create([        // p98-100 登録を行う
+            'content'=> $request->content,
+            'status'=> $request->status,           //追加
         ]);
 
-        return redirect()->back();
         return redirect('/');
 
     }
@@ -158,11 +178,7 @@ class TasksController extends Controller {
         }
 
 
-        $task = Task::find($id);
-        $task->delete();
-        
-        
-        return redirect()->back();
+  
         return redirect('/');
 
     }
