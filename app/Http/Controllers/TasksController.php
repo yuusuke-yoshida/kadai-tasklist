@@ -114,12 +114,17 @@ class TasksController extends Controller
      */
     public function show($id)
     {
-         $task = task::find($id);
-
+        $task = task::find($id);
+         
+        if (\Auth::id() === $task->user_id) {
+         
         return view('tasks.show', [
             'task' => $task,
         ]);
-
+        
+        } else {
+        return redirect('/');
+        }
     }
 
     /**
@@ -132,10 +137,15 @@ class TasksController extends Controller
     {
          $task = Task::find($id);
 
+        if (\Auth::id() === $task->user_id) {
+            
         return view('tasks.edit', [
             'task' => $task,
         ]);
 
+        } else {
+        return redirect('/');
+        }
     }
 
     /**
@@ -151,16 +161,25 @@ class TasksController extends Controller
             'status' => 'required|max:10',   // 追加
             'content' => 'required|max:191',
         ]);
-
+        
+        
         
         $task = Task::find($id);
+        
+        if (\Auth::id() === $task->user_id) {
+            
         $task->status = $request->status;    // 追加
         $task->content = $request->content;
         $task->save();
-
+        
+        }
+      
         return redirect('/');
-
-    }
+        
+    
+            
+    }       
+        
 
     /**
      * Remove the specified resource from storage.
@@ -174,6 +193,7 @@ class TasksController extends Controller
          $task = \App\Task::find($id);
 
         if (\Auth::id() === $task->user_id) {
+            
             $task->delete();
         }
 
